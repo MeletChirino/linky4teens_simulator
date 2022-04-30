@@ -1,6 +1,6 @@
 import time
 
-class TimeBasedEvent:
+class IRQEvent:
     def __init__(self, func, period, **kwargs):
         self.func = func
         self.period = period
@@ -23,5 +23,5 @@ class TimeBasedEvent:
         current_time = time.time() * 1000
         passed_time = current_time - self.last_time
         if (passed_time >= self.period and self.enabled):
-            self.last_time = current_time
             self.func()
+            self.disable()

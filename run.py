@@ -1,22 +1,27 @@
+# local modules
 from components.time_based_event import TimeBasedEvent
+from components.operative_sm import OperativeSM
+from components.atomic_state_machine import Event
+from events import *
+from tasks import *
 
-def task3():
-    print("han pasado 3 segundos")
-
-def task2():
-    print("han pasado 2 segundos")
-
-def task1():
-    print("ha pasado 1 segundo")
 
 def main():
-    task3seconds = TimeBasedEvent(task3, 3, enabled = True)
-    task2seconds = TimeBasedEvent(task2, 2, enabled = True)
-    task1seconds = TimeBasedEvent(task1, 1, enabled = True)
+    op_machine = OperativeSM('OpMachine')
+    # --- event attaching ---
+    op_machine.attach_events(
+            START_RACE,
+            END_RACE,
+            SERIAL_EXIST,
+            END_SERIAL
+            )
+
     while(True):
-        task3seconds.update()
-        task2seconds.update()
-        task1seconds.update()
+        START_RACE_TASK.update()
+        END_RACE_TASK.update()
+        SERIAL_EXIST_TASK.update()
+        END_SERIAL_TASK.update()
+
 
 if __name__ == "__main__":
     main()
