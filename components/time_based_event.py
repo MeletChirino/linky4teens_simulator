@@ -20,6 +20,6 @@ class TimeBasedEvent:
     def update(self):
         current_time = time.time()
         passed_time = current_time - self.last_time
-        if (passed_time >= period and enabled):
+        if (passed_time >= self.period and self.enabled):
             self.last_time = current_time
             self.func()
