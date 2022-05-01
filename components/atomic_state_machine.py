@@ -10,6 +10,7 @@ class Event:
         self.sm_list.pop(SM)
 
     def happen(self, value):
+        print(F"HAPPEN \n---- {self.name} ----")
         for sm in self.sm_list:
             sm.transition(self)
             sm.state_function()

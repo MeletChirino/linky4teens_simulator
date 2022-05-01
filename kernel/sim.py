@@ -3,15 +3,15 @@ import pygame
 import os
 
 # local modules
-from .sim_elements import Player, ZoneDelimiter, START_ZONE_DELIMITER, END_ZONE_DELIMITER
+from .sim_elements import *
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 class RaceGame:
     def __init__(self, **kwargs):
         self.screen_size = kwargs['screen_size']
         self.params = {
-                'speed': 2,
-                'angle_speed': 10,
+                'speed': 0.2,
+                'screen_size': self.screen_size
                 }
 
         pygame.init()
@@ -34,8 +34,10 @@ class RaceGame:
 
         # obstacles
         self.delimiters = [
-                ZoneDelimiter(300, 100, START_ZONE_DELIMITER, self.screen),
-                ZoneDelimiter(600, 100, END_ZONE_DELIMITER, self.screen),
+                ZoneDelimiter(100, START_RACE_DELIMITER, self.screen),
+                ZoneDelimiter(300, START_ZONE_DELIMITER, self.screen),
+                ZoneDelimiter(700, END_ZONE_DELIMITER, self.screen),
+                ZoneDelimiter(1000, END_RACE_DELIMITER, self.screen),
                 ]
 
 

@@ -1,3 +1,4 @@
+'''This file links cyclic event with tasks'''
 # python modules
 from time import time as current_time
 
