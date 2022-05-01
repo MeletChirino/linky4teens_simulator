@@ -130,3 +130,7 @@ dmypy.json
 
 # swap files from vim
 **.swp
+
+# pictures
+**.png
+**.jpeg
