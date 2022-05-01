@@ -4,6 +4,7 @@ import os
 
 # local modules
 from .sim_elements import *
+from components.temoin import TEMOIN_HL
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 class RaceGame:
@@ -39,6 +40,8 @@ class RaceGame:
                 ZoneDelimiter(700, END_ZONE_DELIMITER, self.screen),
                 ZoneDelimiter(1000, END_RACE_DELIMITER, self.screen),
                 ]
+        self.temoin = TEMOIN_HL
+        self.temoin.set_screen(self.screen)
 
 
     def gameloop(self):
@@ -57,6 +60,7 @@ class RaceGame:
 
         self.athlete.dynamics()
         self.draw_element(self.athlete)
+        self.temoin.draw()
 
         for cone in self.delimiters:
             cone.show()

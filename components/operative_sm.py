@@ -5,6 +5,7 @@ from time import time as current_time
 from components.atomic_state_machine import AtomicStateMachine
 from events import *
 from tasks import *
+from components.temoin import TEMOIN_HL
 
 class OperativeSM(AtomicStateMachine):
     def __init__(self, name, **kwargs):
@@ -17,6 +18,8 @@ class OperativeSM(AtomicStateMachine):
                 self.state = 1
                 print("0 -> 1")
                 print("RACE")
+                BLINK_RED_TASK.disable()
+                BLINK_GREEN_TASK.disable()
                 return 0
             elif event == SERIAL_EXIST:
                 self.state = 2
@@ -29,11 +32,14 @@ class OperativeSM(AtomicStateMachine):
                 self.state = 0
                 print("1 -> 0")
                 print("STD_BY")
+                TEMOIN_HL.led.set_yellow()
                 return 0
             if event == RELAY_ZONE_ENTRY_EVENT:
                 self.state = 3
                 print("1 -> 3")
                 print("RELAY ZONE")
+                VIBRATE_TASK.enable()
+                TEMOIN_HL.led.reset_blink()
                 return 0
         # --- state 2 transitions ---
         if self.state == 2 and event == END_SERIAL:
@@ -47,12 +53,16 @@ class OperativeSM(AtomicStateMachine):
                 self.state = 4
                 print("3 -> 4")
                 print("GOOD RELAY")
+                VIBRATE_TASK.disable()
+                BLINK_GREEN_TASK.enable()
                 return 0
             if event == RELAY_ZONE_EXIT_EVENT:
                 self.state = 1
                 print("3 -> 1")
                 print("BAD RELAY")
                 print("RACE")
+                VIBRATE_TASK.disable()
+                BLINK_RED_TASK.enable()
                 return 0
         # --- state 4 transitions ---
         if self.state == 4 and event == RELAY_ZONE_EXIT_EVENT:

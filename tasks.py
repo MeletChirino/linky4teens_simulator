@@ -6,6 +6,7 @@ from time import time as current_time
 from components.time_based_event import TimeBasedEvent
 from components.irq_event import IRQEvent
 from events import *
+from components.temoin import TEMOIN_HL
 
 def task300ms():
     START_RACE.happen(2)
@@ -23,9 +24,22 @@ def task4000ms():
     END_SERIAL.happen(1)
     print("4000ms task:", current_time(), "\n -----\n")
 
+VIBRATE_TASK = TimeBasedEvent(
+        TEMOIN_HL.vibrate,
+        10
+        )
+
+BLINK_RED_TASK = TimeBasedEvent(
+        TEMOIN_HL.led.blink_red,
+        100
+        )
+BLINK_GREEN_TASK = TimeBasedEvent(
+        TEMOIN_HL.led.blink_green,
+        100
+        )
 START_RACE_TASK = IRQEvent(
         task300ms,
-        300,
+        30,
         enabled = True
         )
 

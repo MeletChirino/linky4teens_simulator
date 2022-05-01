@@ -32,6 +32,9 @@ def main():
 
     while(game.running):
         game.gameloop()
+        VIBRATE_TASK.update()
+        BLINK_RED_TASK.update()
+        BLINK_GREEN_TASK.update()
         for delimiter in game.delimiters:
             if delimiter.cross(game.athlete.x):
                 if delimiter.type == START_RACE_DELIMITER:

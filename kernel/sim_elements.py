@@ -1,6 +1,5 @@
 import os
 import pygame
-from numpy import cos, sin
 
 # local modules
 from events import RELAY_EVENT
