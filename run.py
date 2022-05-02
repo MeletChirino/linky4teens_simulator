@@ -21,13 +21,17 @@ def main():
     op_machine = OperativeSM('OpMachine')
     # --- event attaching ---
     op_machine.attach_events(
-            START_RACE,
-            END_RACE,
-            SERIAL_EXIST,
-            END_SERIAL,
+            # race related events
+            START_RACE_EVENT,
+            END_RACE_EVENT,
+            # relay related events
             RELAY_EVENT,
             RELAY_ZONE_ENTRY_EVENT,
             RELAY_ZONE_EXIT_EVENT
+            # connectivity relate events
+            CONNECT_EVENT,
+            DISCONNECT_EVENT,
+            DATA_REQUEST_EVENT,
             )
 
     while(game.running):

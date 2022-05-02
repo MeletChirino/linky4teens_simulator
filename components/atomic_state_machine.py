@@ -34,9 +34,6 @@ class AtomicStateMachine:
     def transition(self, event):
         pass
 
-    def state_function(self):
-        pass
-
     def attach_events(self, *events):
         for event in events:
             event.attach(self)
