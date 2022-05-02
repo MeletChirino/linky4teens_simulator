@@ -78,3 +78,22 @@ class ZoneDelimiter:
                     (self.x - 30, self.y + 60)
                     ]
                 )
+class Button:
+    def __init__(self, x, y, text):
+        self.x = x
+        self.y = y
+        self.text = text
+        self.radius = 40
+        self.color = (255, 255, 0)
+        self.pressed = False
+    def pressing(self, ev):
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+        # ahora tienes que comparar el click del mouse con los posibles puntos del botton, cambiar la variable pressed a True, cambiar el color, el texto y toda esa vaina. Tambien tienes que ligarlo algun evento de button pressed.
+
+class Computer:
+    def __init__(self):
+        self.x = 1300
+        self.y = 100
+    def 
+#a href="https://www.flaticon.com/free-icons/computer" title="computer icons">Computer icons created by xnimrodx - Flaticon</a>
