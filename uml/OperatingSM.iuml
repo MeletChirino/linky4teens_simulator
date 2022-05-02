@@ -1,0 +1,50 @@
+@startuml
+[*] --> STD_BY.1
+note on link
+	led.set_yellow()
+end note
+STD_BY.1 --> RACE.2 :  RACE_START_EVENT
+note on link
+	led.set_blue()
+end note
+RACE.2 --> STD_BY.1 : END_RACE_EVENT
+note on link
+	led.set_yellow()
+end note
+RACE.2 --> RELAY_ZONE.3 : RELAY_ZONE_ENTRY_EVENT
+note on link
+	vibration.start()
+end note
+RELAY_ZONE.3 --> RACE.2 : RELAY_ZONE_EXIT_EVENT
+note on link
+	BLINK_RED_TASK.enable()
+	vibration.stop()
+end note
+RELAY_ZONE.3 --> GOOD_RELAY.4 : RELAY_EVENT
+note on link
+	BLINK_GREEN_TASK.enable()
+	vibration.stop()
+end note
+GOOD_RELAY.4 --> RACE.2 : RELAY_ZONE_EXIT_EVENT
+note on link
+	led.set_blue()
+end note
+
+STD_BY.1 --> CONNECTED_PC.6 : CONNECT_EVENT
+note on link
+	BLINK_YELLOW_TASK.enable()
+end note
+CONNECTED_PC.6 --> STD_BY.1 : DISCONNECT_EVENT
+note on link
+	led.set_yellow()
+end note
+
+CONNECTED_PC.6 --> CONNECTED_PC.6 : DATA_REQUEST_EVENT
+note on link
+	SEND_DATA_TASK.enable()
+end note
+note left of CONNECTED_PC.6
+	Send data task disallow itself after completed
+end note
+
+@enduml

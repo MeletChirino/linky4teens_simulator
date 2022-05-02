@@ -1,0 +1,100 @@
+@startuml
+
+class Temoin {
++int x
++int y
++int width
+-pygame.Rect rect
++LedPWM led
+-int radius
+-bool vibrating
+-int vibrating_power
++void set_screen()
++void draw()
+#int calc_center()
++void vibrate()
+}
+class LedPWM {
++tuple color
+-bool blink
+-int i_blink
++void reset_blink()
++void set_color(tuple)
++void set_blue()
++void set_yellow()
++void set_red()
++void set_green()
++void blink_red()
++void blink_green()
+}
+
+class TimeBasedEvent {
++function func
++int period
++bool enabled
+-int last_time
++void enable()
++void disable()
++void update()
+}
+class Event {
++String name
++list sm_list
++void attach(StateMachine)
++void dettach(StateMachine)
++void happen(int)
+}
+class AtomicStateMachine {
++int state
++String name
++list state_names
++void reset()
++void transition(Event)
++void attach_events(Event)
+}
+class OperativeSM {
+}
+class RaceGame {
++list screen_size
++dict params
++list frame
++pygame.display screen
++bool running
++Player athlete
++list delimiters
++Temoin temoin
++void gameloop()
++void draw_elements(element)
+}
+RaceGame -- Temoin
+RaceGame -- OperativeSM
+AtomicStateMachine --|> OperativeSM
+OperativeSM -- Event
+OperativeSM -- TimeBasedEvent
+
+Temoin -- LedPWM
+
+class Player {
++int x
++int y
++int speed
++pygame.image logo
++void update_params(params)
++void move_forward()
++void stop_move()
++void dynamics()
++void keystroke_movements(event)
+}
+Player -- RaceGame
+
+class ZoneDelimiter {
++int x
++int y
++int type
++int color
++pygame.display screen
++void cross()
++void show()
+}
+ZoneDelimiter -- RaceGame
+@enduml
