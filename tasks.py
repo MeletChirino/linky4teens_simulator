@@ -10,7 +10,7 @@ from components.temoin import TEMOIN_HL
 
 def send_data():
     for i in range(50):
-        print("send data")
+        print(F"send data {i}")
     SEND_DATA_TASK.disable()
 
 VIBRATE_TASK = TimeBasedEvent(

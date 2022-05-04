@@ -61,7 +61,7 @@ class RaceGame:
                     self.running = False
                 if event.key == pygame.K_c:
                     # se conecta al computador
-                    CONNECT_EVENT.happen(1)
+                    DISCONNECT_EVENT.happen(1)
                 if event.key == pygame.K_v:
                     DATA_REQUEST_EVENT.happen(1)
             self.athlete.keystroke_movements(event)

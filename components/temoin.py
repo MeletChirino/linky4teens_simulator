@@ -2,6 +2,8 @@
 import pygame
 import time
 
+from tasks import *
+
 class LedPWM:
     def __init__(self):
         self.color = (255, 255, 255)
@@ -38,15 +40,15 @@ class LedPWM:
             self.set_blue()
 
     def blink_green(self):
-        self.blink = not self.blink
-        if self.blink:
-            self.set_green()
+        if self.i_blink <= 11:
+            self.blink = not self.blink
+            if self.blink:
+                self.set_green()
+            else:
+                self.set_yellow()
+            self.i_blink += 1
         else:
-            self.set_yellow()
-        self.i_blink += 1
-        if self.i_blink >= 11:
-            self.i_blink = 0
-            BLINK_GREEN_TASK.disable()
+            self.set_blue()
 
     def blink_yellow(self):
         self.blink = not self.blink

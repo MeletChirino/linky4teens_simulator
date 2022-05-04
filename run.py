@@ -32,7 +32,7 @@ def main():
             # Good Relay (3)
             (3, 1, [TEMOIN_HL.led.set_blue], RELAY_ZONE_EXIT_EVENT),
             # Connected Pc (4)
-            (4, 4, [SEND_DATA_TASK.enable, BLINK_YELLOW_TASK.enable], DATA_REQUEST_EVENT),
+            (4, 4, [BLINK_YELLOW_TASK.enable, send_data], DATA_REQUEST_EVENT),
             (4, 0, [TEMOIN_HL.led.set_yellow, SEND_DATA_TASK.disable], DISCONNECT_EVENT),
             )
     op_machine.set_state_function_list(
@@ -40,7 +40,7 @@ def main():
             [BLINK_RED_TASK.update],
             [VIBRATE_TASK.update],
             [BLINK_GREEN_TASK.update],
-            [SEND_DATA_TASK.update, BLINK_YELLOW_TASK.update],#send data 
+            [BLINK_YELLOW_TASK.update],#send data 
             )
 
     # --- event attaching ---
