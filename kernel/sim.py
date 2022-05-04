@@ -5,6 +5,7 @@ import os
 # local modules
 from .sim_elements import *
 from components.temoin import TEMOIN_HL
+from events import *
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 class RaceGame:
@@ -42,6 +43,7 @@ class RaceGame:
                 ]
         self.temoin = TEMOIN_HL
         self.temoin.set_screen(self.screen)
+        self.button = Button(1200, 150, 'Connect', self.screen)
 
 
     def gameloop(self):
@@ -50,17 +52,27 @@ class RaceGame:
             if event.type == pygame.QUIT:
                 self.running = False
 
+            # handle MOUSEBUTTONUP
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     self.running = False
-                if event.key == pygame.K_SPACE:
-                    #aqui se hace el relevo
-                    pass
+                if event.key == pygame.K_c:
+                    # se conecta al computador
+                    CONNECT_EVENT.happen(1)
+                if event.key == pygame.K_v:
+                    DATA_REQUEST_EVENT.happen(1)
             self.athlete.keystroke_movements(event)
+            if self.button.pressing(event):
+                CONNECT_EVENT.happen(1)
 
         self.athlete.dynamics()
         self.draw_element(self.athlete)
         self.temoin.draw()
+        self.button.show()
+
 
         for cone in self.delimiters:
             cone.show()

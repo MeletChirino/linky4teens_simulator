@@ -38,15 +38,22 @@ class LedPWM:
             self.set_blue()
 
     def blink_green(self):
-        if self.i_blink <= 11:
-            self.blink = not self.blink
-            if self.blink:
-                self.set_green()
-            else:
-                self.set_yellow()
-            self.i_blink += 1
+        self.blink = not self.blink
+        if self.blink:
+            self.set_green()
         else:
+            self.set_yellow()
+        self.i_blink += 1
+        if self.i_blink >= 11:
+            self.i_blink = 0
+            BLINK_GREEN_TASK.disable()
+
+    def blink_yellow(self):
+        self.blink = not self.blink
+        if self.blink:
             self.set_blue()
+        else:
+            self.set_yellow()
 
 class Temoin:
     def __init__(self, x, y):

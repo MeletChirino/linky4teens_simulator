@@ -79,21 +79,36 @@ class ZoneDelimiter:
                     ]
                 )
 class Button:
-    def __init__(self, x, y, text):
+    def __init__(self, x, y, text, screen):
         self.x = x
         self.y = y
         self.text = text
         self.radius = 40
         self.color = (255, 255, 0)
         self.pressed = False
+        self.screen = screen
+
+    def show(self):
+        pygame.draw.circle(
+                self.screen,
+                self.color,
+                (self.x, self.y),
+                self.radius
+                )
+
     def pressing(self, ev):
-        if event.type == pygame.MOUSEBUTTONUP:
+        if ev.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
+            x = pos[0]
+            y = pos[1]
+            pressed  = x <= self.x + self.radius and x >= self.x - self.radius and y <= self.y + self.radius and y >= self.y - self.radius
+            if x <= self.x + self.radius and x >= self.x - self.radius:
+                return True
         # ahora tienes que comparar el click del mouse con los posibles puntos del botton, cambiar la variable pressed a True, cambiar el color, el texto y toda esa vaina. Tambien tienes que ligarlo algun evento de button pressed.
 
 class Computer:
     def __init__(self):
         self.x = 1300
         self.y = 100
-    def 
+    #def 
 #a href="https://www.flaticon.com/free-icons/computer" title="computer icons">Computer icons created by xnimrodx - Flaticon</a>
