@@ -8,6 +8,11 @@ from components.irq_event import IRQEvent
 from events import *
 from components.temoin import TEMOIN_HL
 
+def send_data():
+    for i in range(50):
+        print("send data")
+    SEND_DATA_TASK.disable()
+
 VIBRATE_TASK = TimeBasedEvent(
         TEMOIN_HL.vibrate,
         10
@@ -21,3 +26,12 @@ BLINK_GREEN_TASK = TimeBasedEvent(
         TEMOIN_HL.led.blink_green,
         100
         )
+BLINK_YELLOW_TASK = TimeBasedEvent(
+        TEMOIN_HL.led.blink_yellow,
+        100
+        )
+SEND_DATA_TASK = TimeBasedEvent(
+        send_data,
+        200
+        )
+
